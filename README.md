@@ -6,10 +6,14 @@
 - Ok RAG classification
 
 ## Needs:
-- Transaction parsing special cases (e.g. Amex and fidelity in frost files)
+- Better Category classifier
+    - Might need to manually create a model that incrementally gets better
+- Get vector search working
 - Better RAG classification
 - Better system prompts
+    - These have gotten better, added chat history into context
 - Need a bigger and better model
+    - switch to lambda3.1 8b
 - Need SVT
 
 ## Stretch:

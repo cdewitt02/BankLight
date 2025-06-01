@@ -71,13 +71,14 @@ def insertTransaction(transaction):
     try:
         cursor = conn.cursor()
         cursor.execute(
-            """INSERT INTO transactions (date, description, amount, account, embedding)
-            VALUES (%s, %s, %s, %s, %s)""",
+            """INSERT INTO transactions (date, description, amount, account, category, embedding)
+            VALUES (%s, %s, %s, %s, %s, %s)""",
             (
                 transaction['date'],
                 transaction['description'],
                 transaction['amount'],
                 transaction['account'],
+                transaction['category'],
                 embedding.tolist() 
             )
         )
@@ -103,13 +104,13 @@ def insertTransactionsBatch(transactions):
     try:
         cursor = conn.cursor()
         insert_data = [
-            (t['date'], t['description'], t['amount'], t['account'], emb.tolist())
+            (t['date'], t['description'], t['amount'], t['account'], t['category'], emb.tolist())
             for t, emb in zip(transactions, embeddings)
         ]
         
         cursor.executemany(
-            """INSERT INTO transactions (date, description, amount, account, embedding)
-            VALUES (%s, %s, %s, %s, %s)""",
+            """INSERT INTO transactions (date, description, amount, account, category, embedding)
+            VALUES (%s, %s, %s, %s, %s, %s)""",
             insert_data
         )
         conn.commit()
